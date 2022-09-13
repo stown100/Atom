@@ -1,0 +1,98 @@
+.register-form {
+  padding: 25px 15px;
+  background-color: rgb(178, 16, 186);
+  position: absolute;
+  top: 30px;
+  left: calc(50% - 200px);
+  width: 400px;
+  border-radius: 5px;
+  z-index: 3;
+  &_hidden {
+    display: none;
+  }
+  &__title {
+    text-transform: uppercase;
+    color: #ffffff;
+    font-size: 24px;
+    line-height: 30px;
+    margin: 0 0 15px;
+  }
+  &__label {
+    color: #ffffff;
+    margin-bottom: 3px;
+  }
+  &__input {
+    margin-bottom: 10px;
+    padding: 15px 25px;
+    border-radius: 8px;
+    border: 0;
+    width: calc(100% - 70px);
+    &_error {
+      border: 1px solid red;
+      margin-bottom: 10px;
+      padding: 15px 25px;
+      border-radius: 8px;
+      width: calc(100% - 70px);
+    }
+  }
+  &__button {
+    background-color: rgb(62, 241, 62);
+    padding: 15px 80px;
+    transition: 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    margin: 25px auto 0;
+    border: 0;
+    &_invalid {
+      background-color: rgb(167, 167, 167);
+      color: #000000;
+      padding: 15px 80px;
+      margin: 25px auto 0;
+      border: 0;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  &__button:hover {
+    color: #ffffff;
+    background-color: rgb(43, 165, 43);
+  }
+  &__close {
+    width: 20px;
+    height: 20px;
+    transition: 0.3s ease-in-out;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+  &__close:hover {
+    opacity: 0.7;
+  }
+  &__password-block {
+    position: relative;
+    &_hidden {
+      display: none;
+    }
+  }
+  &__eye {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: calc(50% - 5px);
+    right: 30px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    opacity: 0.8;
+    &:hover {
+      opacity: 0.6;
+    }
+    &_hidden {
+      display: none;
+    }
+  }
+}
+
+.close-img {
+  cursor: pointer;
+}

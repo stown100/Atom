@@ -1,0 +1,140 @@
+.authorization-form {
+  position: relative;
+  z-index: 2;
+  top: 120px;
+  left: 150px;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  &_hidden {
+    display: none;
+  }
+  &__title {
+    text-transform: uppercase;
+    color: #ffffff;
+    font-size: 24px;
+    line-height: 30px;
+    margin: 0 0 15px;
+  }
+  &__label {
+    color: #ffffff;
+    margin-bottom: 5px;
+  }
+  &__input {
+    margin-bottom: 20px;
+    padding: 15px 25px;
+    border-radius: 8px;
+    border: 0;
+    width: calc(100% - 52px);
+    &_error {
+      border: 1px solid red;
+      margin-bottom: 15px;
+      padding: 15px 25px;
+      border-radius: 8px;
+      width: calc(100% - 52px);
+    }
+  }
+  &__error {
+    color: red;
+    margin-bottom: 5px;
+    margin-top: -10px;
+    line-height: 16px;
+    font-size: 14px;
+  }
+  &__remember-and-enter {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    align-items: center;
+  }
+  &__enter {
+    width: 50%;
+  }
+
+  &__enter-btn {
+    width: 100%;
+    background-color: dodgerblue;
+    color: #ffffff;
+    padding: 15px 0;
+    transition: 0.3s ease-in-out;
+    border: 0;
+    &_invalid {
+      background-color: rgb(167, 167, 167);
+      color: #ffffff;
+      padding: 15px 0;
+      transition: 0.3s ease-in-out;
+      border: 0;
+      width: 100%;
+      color: #000000;
+    }
+  }
+  &__enter-btn:hover {
+    background-color: rgb(15, 71, 128);
+  }
+  &__register {
+    background-color: rgb(62, 241, 62);
+    padding: 15px 0;
+    transition: 0.3s ease-in-out;
+    border: 0;
+  }
+  &__register:hover {
+    color: #ffffff;
+    background-color: rgb(43, 165, 43);
+  }
+  &__password-block {
+    position: relative;
+    &_hidden {
+      display: none;
+    }
+  }
+  &__eye {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: calc(50% - 5px);
+    right: 20px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    opacity: 0.8;
+    &:hover {
+      opacity: 0.6;
+    }
+    &_hidden {
+      display: none;
+    }
+  }
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  &_visible {
+    display: block;
+  }
+  &_hidden {
+    display: none;
+  }
+  &__btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
+    padding: 0;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  &__remember {
+    color: #ffffff;
+  }
+  &__span {
+    margin-right: 20px;
+    color: #ffffff;
+  }
+}
+
+.change-form-error {
+  color: red;
+  font-size: 13px;
+  line-height: 15px;
+}

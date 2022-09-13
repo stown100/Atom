@@ -1,0 +1,38 @@
+.profile {
+  width: 80%;
+  margin-top: 83.83px;
+  background-color: rgb(110, 27, 108);
+  padding: 50px 20px;
+  &__title {
+    margin: 0 0 20px;
+    color: #ffffff;
+    font-size: 28px;
+    line-height: 34px;
+  }
+  &__switches {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: rgb(179, 44, 176);
+  }
+}
+
+.switch {
+    background-color: rgb(179, 44, 176);
+    border: 0;
+    color: #ffffff;
+    border-radius: 0;
+    width: 250px;
+    transition: 0.3s ease-in-out;
+    &_not-active {
+      background-color: rgb(210, 52, 207);
+      border: 0;
+      color: #ffffff;
+      border-radius: 0;
+      width: 250px;
+      transition: 0.3s ease-in-out;
+    }
+    &:hover {
+      opacity: 0.7;
+    }
+  }

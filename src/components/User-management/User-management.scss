@@ -1,0 +1,98 @@
+.filter-form {
+  display: flex;
+  flex-direction: row;
+  padding: 50px 0 0 50px;
+  align-items: center;
+  &__img {
+    width: 30px;
+    height: 30px;
+    margin-right: 25px;
+  }
+  &__input {
+    padding: 12px 20px;
+    border-radius: 10px;
+    margin-right: 25px;
+    border: 0;
+    font-size: 13px;
+    line-height: 15px;
+  }
+  &__input:last-of-type {
+    margin-right: 0;
+  }
+  &__add-btn {
+    border-radius: 5px;
+    border: 0;
+    color: #ffffff;
+    transition: background-color 0.3s ease-in-out;
+    background-color: darkturquoise;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 7px 12px;
+    margin-left: auto;
+    margin-top: -50px;
+    &:hover {
+      background-color: rgb(0, 138, 140);
+      border: 1px solid white;
+      padding: 6px 11px;
+    }
+  }
+}
+
+table {
+  margin: 30px 0 0 50px;
+  border-collapse: collapse;
+  width: calc(100% - 50px);
+}
+
+th {
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+td {
+  padding: 10px 10px;
+  position: relative;
+  align-items: center;
+  color: #ffffff;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    &:last-of-type {
+      margin-left: 10px;
+    }
+    &:first-of-type {
+      margin-left: 0;
+    }
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  &:first-of-type {
+    border-left: 1px solid white;
+  }
+  &:last-of-type {
+    // Поправить вёрстку !!!
+    padding-left: 60px;
+    padding-right: 20px;
+    border-right: 1px solid white;
+  }
+}
+
+tr {
+  width: 100%;
+  span {
+    position: absolute;
+    right: 0;
+    color: darkmagenta;
+  }
+}
+tr:nth-child(even) {
+  background-color: rgb(216, 114, 214);
+}
