@@ -5,42 +5,50 @@ import checkboxImg from "../../assets/images/checkbox-mark-svgrepo-com.svg";
 import { CurrentUserContext } from "../contexts/context";
 import eyeImg from "../../assets/images/eye-password.svg";
 
-function Card({
-  validName,
-  validEmail,
-  validPassword,
-  validConfirmPassword,
-  validPatronymic,
-  validLastName,
-  redacted,
-  setRedacted,
-  valueTel,
-  setValueTel,
-  valueGender,
-  setValueGender,
-  validTel,
-  visiblePassword,
-}) {
-  const {
-    valueName,
-    setValueName,
-    valueLastName,
-    setValueLastName,
-    valuePatronymic,
-    setValuePatronymic,
-    valueEmail,
-    setValueEmail,
-    valuePassword,
-    setValuePassword,
-    valueConfirmPassword,
-    setValueConfirmPassword,
-    valueDate,
-    setValueDate,
-  } = React.useContext(CurrentUserContext);
+function Card({ redacted, setRedacted, visiblePassword, setCurrentUser }) {
+  const currentUser = React.useContext(CurrentUserContext);
 
   const [checkboxGender, setCheckboxGender] = React.useState(false);
 
-  console.log(checkboxGender)
+  const validTel =
+    currentUser.tel.replace(/[^0-9]+/g, "") && currentUser.tel.length === 14;
+  const validName =
+    currentUser.name &&
+    currentUser.name !== null &&
+    currentUser.name.length >= 3 &&
+    currentUser.name.length <= 20 &&
+    currentUser.name === currentUser.name.replace(/[^a-zA-Zа-яА-Я]/gi, "");
+  const validEmail =
+    currentUser.email &&
+    currentUser.email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+  const regexPassword =
+    /[A-Z]/g.test(currentUser.password) &&
+    /[a-z]/g.test(currentUser.password) &&
+    /[^a-zA-Z]/g.test(currentUser.password);
+  const validPassword =
+    currentUser.password &&
+    currentUser.password !== null &&
+    currentUser.password.length >= 6 &&
+    currentUser.password.length <= 30 &&
+    regexPassword;
+  const validConfirmPassword =
+    currentUser.password === currentUser.confirmPassword;
+  const validPatronymic =
+    currentUser.patronymic &&
+    (currentUser.patronymic !== null ||
+      (currentUser.patronymic.length >= 3 &&
+        currentUser.patronymic.length <= 20 &&
+        currentUser.patronymic ===
+          currentUser.patronymic.replace(/[^a-zA-Zа-яА-Я]/gi, "")));
+  const validLastName =
+    currentUser.lastName &&
+    currentUser.lastName !== null &&
+    currentUser.lastName.length >= 3 &&
+    currentUser.lastName.length <= 20 &&
+    currentUser.lastName ===
+      currentUser.lastName.replace(/[^a-zA-Zа-яА-Я]/gi, "");
 
   const openFormWithRedactedProfile = (e) => {
     e.preventDefault();
@@ -52,9 +60,45 @@ function Card({
     if (e.target.className === "checkbox__btn") {
       setCheckboxGender(!checkboxGender);
       if (e.target.parentElement.children[1].textContent === "М") {
-        setValueGender("мужской");
+        setCurrentUser({
+          id: currentUser.id,
+          img: currentUser.img,
+          name: currentUser.name,
+          lastName: currentUser.lastName,
+          patronymic: currentUser.patronymic,
+          date: currentUser.date,
+          email: currentUser.email,
+          lastDate: currentUser.lastDate,
+          currentSession: currentUser.currentSession,
+          cart: currentUser.cart,
+          edit: currentUser.edit,
+          tel: currentUser.tel,
+          gender: "Мужской",
+          password: currentUser.password,
+          confirmPassword: currentUser.confirmPassword,
+          roles: currentUser.roles,
+          functions: currentUser.functions,
+        });
       } else {
-        setValueGender("женский");
+        setCurrentUser({
+          id: currentUser.id,
+          img: currentUser.img,
+          name: currentUser.name,
+          lastName: currentUser.lastName,
+          patronymic: currentUser.patronymic,
+          date: currentUser.date,
+          email: currentUser.email,
+          lastDate: currentUser.lastDate,
+          currentSession: currentUser.currentSession,
+          cart: currentUser.cart,
+          edit: currentUser.edit,
+          tel: currentUser.tel,
+          gender: "Женский",
+          password: currentUser.password,
+          confirmPassword: currentUser.confirmPassword,
+          roles: currentUser.roles,
+          functions: currentUser.functions,
+        });
       }
     }
   };
@@ -62,23 +106,169 @@ function Card({
   const redactedProfile = (e) => {
     e.preventDefault();
     if (e.target.name === "name") {
-      setValueName(e.target.value);
+      setCurrentUser({
+        id: currentUser.id,
+        img: currentUser.img,
+        name: e.target.value,
+        lastName: currentUser.lastName,
+        patronymic: currentUser.patronymic,
+        date: currentUser.date,
+        email: currentUser.email,
+        lastDate: currentUser.lastDate,
+        currentSession: currentUser.currentSession,
+        cart: currentUser.cart,
+        edit: currentUser.edit,
+        tel: currentUser.tel,
+        gender: currentUser.gender,
+        password: currentUser.password,
+        confirmPassword: currentUser.confirmPassword,
+        roles: currentUser.roles,
+        functions: currentUser.functions,
+      });
     } else if (e.target.name === "last-name") {
-      setValueLastName(e.target.value);
+      setCurrentUser({
+        id: currentUser.id,
+        img: currentUser.img,
+        name: currentUser.name,
+        lastName: e.target.value,
+        patronymic: currentUser.patronymic,
+        date: currentUser.date,
+        email: currentUser.email,
+        lastDate: currentUser.lastDate,
+        currentSession: currentUser.currentSession,
+        cart: currentUser.cart,
+        edit: currentUser.edit,
+        tel: currentUser.tel,
+        gender: currentUser.gender,
+        password: currentUser.password,
+        confirmPassword: currentUser.confirmPassword,
+        roles: currentUser.roles,
+        functions: currentUser.functions,
+      });
     } else if (e.target.name === "patronymic") {
-      setValuePatronymic(e.target.value);
+      setCurrentUser({
+        id: currentUser.id,
+        img: currentUser.img,
+        name: currentUser.name,
+        lastName: currentUser.lastName,
+        patronymic: e.target.value,
+        date: currentUser.date,
+        email: currentUser.email,
+        lastDate: currentUser.lastDate,
+        currentSession: currentUser.currentSession,
+        cart: currentUser.cart,
+        edit: currentUser.edit,
+        tel: currentUser.tel,
+        gender: currentUser.gender,
+        password: currentUser.password,
+        confirmPassword: currentUser.confirmPassword,
+        roles: currentUser.roles,
+        functions: currentUser.functions,
+      });
     } else if (e.target.name === "date") {
-      setValueDate(e.target.value);
+      setCurrentUser({
+        id: currentUser.id,
+        img: currentUser.img,
+        name: currentUser.name,
+        lastName: currentUser.lastName,
+        patronymic: currentUser.patronymic,
+        date: e.target.value,
+        email: currentUser.email,
+        lastDate: currentUser.lastDate,
+        currentSession: currentUser.currentSession,
+        cart: currentUser.cart,
+        edit: currentUser.edit,
+        tel: currentUser.tel,
+        gender: currentUser.gender,
+        password: currentUser.password,
+        confirmPassword: currentUser.confirmPassword,
+        roles: currentUser.roles,
+        functions: currentUser.functions,
+      });
     } else if (e.target.name === "tel") {
-      setValueTel(e.target.value);
+      setCurrentUser({
+        id: currentUser.id,
+        img: currentUser.img,
+        name: currentUser.name,
+        lastName: currentUser.lastName,
+        patronymic: currentUser.patronymic,
+        date: currentUser.date,
+        email: currentUser.email,
+        lastDate: currentUser.lastDate,
+        currentSession: currentUser.currentSession,
+        cart: currentUser.cart,
+        edit: currentUser.edit,
+        tel: e.target.value,
+        gender: currentUser.gender,
+        password: currentUser.password,
+        confirmPassword: currentUser.confirmPassword,
+        roles: currentUser.roles,
+        functions: currentUser.functions,
+      });
     } else if (e.target.name === "password") {
-      setValuePassword(e.target.value);
+      setCurrentUser({
+        id: currentUser.id,
+        img: currentUser.img,
+        name: currentUser.name,
+        lastName: currentUser.lastName,
+        patronymic: currentUser.patronymic,
+        date: currentUser.date,
+        email: currentUser.email,
+        lastDate: currentUser.lastDate,
+        currentSession: currentUser.currentSession,
+        cart: currentUser.cart,
+        edit: currentUser.edit,
+        tel: currentUser.tel,
+        gender: currentUser.gender,
+        password: e.target.value,
+        confirmPassword: currentUser.confirmPassword,
+        roles: currentUser.roles,
+        functions: currentUser.functions,
+      });
     } else if (e.target.name === "email") {
-      setValueEmail(e.target.value);
+      setCurrentUser({
+        id: currentUser.id,
+        img: currentUser.img,
+        name: currentUser.name,
+        lastName: currentUser.lastName,
+        patronymic: currentUser.patronymic,
+        date: currentUser.date,
+        email: e.target.value,
+        lastDate: currentUser.lastDate,
+        currentSession: currentUser.currentSession,
+        cart: currentUser.cart,
+        edit: currentUser.edit,
+        tel: currentUser.tel,
+        gender: currentUser.gender,
+        password: currentUser.password,
+        confirmPassword: currentUser.confirmPassword,
+        roles: currentUser.roles,
+        functions: currentUser.functions,
+      });
     } else if (e.target.name === "confirm-password") {
-      setValueConfirmPassword(e.target.value);
+      setCurrentUser({
+        id: currentUser.id,
+        img: currentUser.img,
+        name: currentUser.name,
+        lastName: currentUser.lastName,
+        patronymic: currentUser.patronymic,
+        date: currentUser.date,
+        email: currentUser.email,
+        lastDate: currentUser.lastDate,
+        currentSession: currentUser.currentSession,
+        cart: currentUser.cart,
+        edit: currentUser.edit,
+        tel: currentUser.tel,
+        gender: currentUser.gender,
+        password: currentUser.password,
+        confirmPassword: e.target.value,
+        roles: currentUser.roles,
+        functions: currentUser.functions,
+      });
     }
   };
+
+  const user = JSON.parse(window.localStorage.getItem("currentUser"));
 
   return (
     <div className="card">
@@ -92,30 +282,45 @@ function Card({
         <img className="user__avatar" src={avatar} alt="avatar"></img>
         <div className="user__info">
           <div className="user-description">Фамилия</div>
-          <div className="user-field">{valueLastName}</div>
+          <div className="user-field">
+            {(currentUser && currentUser.lastName) || user.lastName}
+          </div>
           <div className="user-description">Имя</div>
-          <div className="user-field">{valueName}</div>
+          <div className="user-field">
+            {(currentUser && currentUser.name) || user.name}
+          </div>
           <div className="user-description">Отчество</div>
-          <div className="user-field">{valuePatronymic}</div>
+          <div className="user-field">
+            {(currentUser && currentUser.patronymic) || user.patronymic}
+          </div>
           <div className="user-info-little">
             <div className="user-info-little__block">
               <div className="user-info-little__description">дата рождения</div>
-              <div className="user-info-little__field">{valueDate}</div>
+              <div className="user-info-little__field">
+                {(currentUser && currentUser.date) || user.date}
+              </div>
             </div>
             <div className="user-info-little__block">
               <div className="user-info-little__description">пол</div>
-              <div className="user-info-little__field">{valueGender}</div>
+              <div className="user-info-little__field">
+                {(currentUser && currentUser.gender) || user.gender}
+              </div>
             </div>
           </div>
         </div>
         <div className="user__info">
           <div className="user-description">Email</div>
-          <div className="user-field">{valueEmail}</div>
+          <div className="user-field">
+            {(currentUser && currentUser.email) || user.email}
+          </div>
           <div className="user-description">Телефон</div>
-          <div className="user-field">{valueTel}</div>
+          <div className="user-field">
+            {(currentUser && currentUser.tel) || user.tel}
+          </div>
           <div className="user-description">Пароль</div>
           <div className="user-field">
-            {valuePassword.split("").map((i) => (i = "*"))}
+            {(currentUser && user.password.split("").map((i) => (i = "*"))) ||
+              currentUser.password.split("").map((i) => (i = "*"))}
           </div>
         </div>
       </div>
@@ -129,15 +334,15 @@ function Card({
           <label className="editing-description">Фамилия</label>
           <input
             className={`${
-              validLastName && valueLastName.length > 0
+              validLastName && currentUser.lastName.length > 0
                 ? "editing-field"
                 : "editing-field_error"
             }`}
             name="last-name"
-            value={valueLastName}
-            onChange={redactedProfile}
+            value={currentUser.lastName}
+            onChange={(e) => redactedProfile(e)}
           ></input>
-          {!validLastName && valueLastName.length > 0 && (
+          {!validLastName && currentUser.lastName.length > 0 && (
             <span className="change-form-error">
               Фамилия должна быть длиной от трёх до двадцати символов, только
               буквы.
@@ -146,15 +351,15 @@ function Card({
           <label className="editing-description">Имя</label>
           <input
             className={`${
-              validName && valueName.length > 0
+              validName && currentUser.name.length > 0
                 ? "editing-field"
                 : "editing-field_error"
             }`}
             name="name"
-            value={valueName}
-            onChange={redactedProfile}
+            value={currentUser.name}
+            onChange={(e) => redactedProfile(e)}
           ></input>
-          {!validName && valueName.length > 0 && (
+          {!validName && currentUser.name.length > 0 && (
             <span className="change-form-error">
               Имя должно быть длиной от трёх до двадцати символов, только буквы.
             </span>
@@ -162,15 +367,15 @@ function Card({
           <label className="editing-description">Отчество</label>
           <input
             className={`${
-              validPatronymic && valuePatronymic.length > 0
+              validPatronymic && currentUser.patronymic.length > 0
                 ? "editing-field"
                 : "editing-field_error"
             }`}
             name="patronymic"
-            value={valuePatronymic}
-            onChange={redactedProfile}
+            value={currentUser.patronymic}
+            onChange={(e) => redactedProfile(e)}
           ></input>
-          {!validPatronymic && valuePatronymic.length > 0 && (
+          {!validPatronymic && currentUser.patronymic.length > 0 && (
             <span className="change-form-error">
               Отчество должно быть длиной от трёх до двадцати символов, только
               буквы.
@@ -185,8 +390,8 @@ function Card({
                 className="editing-info-little__field"
                 name="date"
                 type="date"
-                value={valueDate}
-                onChange={redactedProfile}
+                value={currentUser.date}
+                onChange={(e) => redactedProfile(e)}
               ></input>
             </div>
             <div className="editing-info-little__block">
@@ -224,32 +429,32 @@ function Card({
           <label className="editing-description">Email</label>
           <input
             className={`${
-              validEmail && valueEmail.length > 0
+              validEmail && currentUser.email.length > 0
                 ? "editing-field"
                 : "editing-field_error"
             }`}
             name="email"
             type="email"
-            value={valueEmail}
-            onChange={redactedProfile}
+            value={currentUser.email}
+            onChange={(e) => redactedProfile(e)}
           ></input>
-          {!validEmail && valueEmail.length > 0 && (
+          {!validEmail && currentUser.email.length > 0 && (
             <span className="change-form-error">Введите корректный email</span>
           )}
           <label className="editing-description">Телефон</label>
           <input
             className={`${
-              validTel && valueTel.length > 0
+              validTel && currentUser.tel.length > 0
                 ? "editing-field"
                 : "editing-field_error"
             }`}
             name="tel"
             type="tel"
             pattern="[7]{1} [0-9]{3}-[0-9]{3}-[0-9]{4}"
-            value={valueTel}
-            onChange={redactedProfile}
+            value={currentUser.tel}
+            onChange={(e) => redactedProfile(e)}
           ></input>
-          {!validTel && valueTel.length > 0 && (
+          {!validTel && currentUser.tel.length > 0 && (
             <span className="change-form-error">
               Введите телефон в формате 9 999-999-9999
             </span>
@@ -258,14 +463,14 @@ function Card({
             <label className="editing-description">Пароль</label>
             <input
               className={`${
-                validPassword && valuePassword.length > 0
+                validPassword && currentUser.password.length > 0
                   ? "editing-field"
                   : "editing-field_error"
               }`}
               name="password"
               type="password"
-              value={valuePassword}
-              onChange={redactedProfile}
+              value={currentUser.password}
+              onChange={(e) => redactedProfile(e)}
             ></input>
             <img
               className="editing-description__eye"
@@ -273,7 +478,7 @@ function Card({
               alt="eye"
               onClick={(e) => visiblePassword(e)}
             ></img>
-            {!validPassword && valuePassword.length > 0 && (
+            {!validPassword && currentUser.password.length > 0 && (
               <span className="change-form-error">
                 Пароль должен содержать минимум одну цифру, одну большую и
                 маленьку буквы латинского алфавита и быть не короче шести
@@ -285,14 +490,14 @@ function Card({
             <label className="editing-description">Повторите пароль</label>
             <input
               className={`${
-                validConfirmPassword && valueConfirmPassword.length > 0
+                validConfirmPassword && currentUser.confirmPassword.length > 0
                   ? "editing-field"
                   : "editing-field_error"
               }`}
               name="confirm-password"
               type="password"
-              value={valueConfirmPassword}
-              onChange={redactedProfile}
+              value={currentUser.confirmPassword}
+              onChange={(e) => redactedProfile(e)}
             ></input>
             <img
               className="editing-description__eye"
@@ -300,9 +505,10 @@ function Card({
               alt="eye"
               onClick={(e) => visiblePassword(e)}
             ></img>
-            {!validConfirmPassword && valueConfirmPassword.length > 0 && (
-              <span className="change-form-error">Пароли не совпадают</span>
-            )}
+            {!validConfirmPassword &&
+              currentUser.confirmPassword.length > 0 && (
+                <span className="change-form-error">Пароли не совпадают</span>
+              )}
           </div>
         </form>
       </div>

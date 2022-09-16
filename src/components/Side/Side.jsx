@@ -3,7 +3,13 @@ import person1 from "../../assets/images/person1.svg";
 import person2 from "../../assets/images/person2.svg";
 import person3 from "../../assets/images/person3.svg";
 
-function Side({ sideActive, setSideActive, setRedacted, setSwitchElem }) {
+function Side({
+  sideActive,
+  setSideActive,
+  setRedacted,
+  setSwitchElem,
+  roleInfo,
+}) {
   const sideArr = [
     {
       id: 0,
@@ -23,19 +29,27 @@ function Side({ sideActive, setSideActive, setRedacted, setSwitchElem }) {
   ];
 
   const toggleSide = (e, item) => {
-    e.preventDefault();
-    setSideActive(item.id)
+    if (roleInfo.role === "Администратор" && item.id === 2) e.preventDefault();
+    setSideActive(item.id);
     setRedacted(false);
     setSwitchElem(false);
-  }
+  };
+
 
   return (
     <ul className="side">
       {sideArr.map((item) => (
-        <li className={sideActive !== item.id ? "chapter" : "chapter_active"} key={item.id} onClick={(e) => toggleSide(e, item)}>
-          <img className="chapter__img" src={item.img} alt="user"></img>
-          <p className="chapter__text">{item.title}</p>
-        </li>
+        <button
+          key={item.id}
+          onClick={(e) => toggleSide(e, item)}
+          className={sideActive !== item.id ? "chapter" : "chapter_active"}
+          disabled={roleInfo.role !== "Администратор" && item.id === 2}
+        >
+          <li className="chapter__li">
+            <img className="chapter__img" src={item.img} alt="user"></img>
+            <p className="chapter__text">{item.title}</p>
+          </li>
+        </button>
       ))}
     </ul>
   );

@@ -1,6 +1,32 @@
 .home {
-    background-color: rgb(179, 44, 176);
-    display: flex;
-    width: 100vw;
-    min-height: 100vh;
+  background-color: rgb(179, 44, 176);
+  display: flex;
+  padding: 0;
+  margin: 0;
+  width: 98.93228vw;
+  min-height: 100vh;
+}
+
+.error {
+  width: 100vw;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  text-align: center;
+  &__title {
+    font-size: 46px;
+    line-height: 54px;
+    color: #000000;
+    cursor: pointer;
+    border-bottom: 2px solid #000000;
+    transition: .3s ease-in-out;
+    width: 40%;
+    margin: 0;
+    padding: 0;
+    &:hover {
+        color: #00000099;
+        border-bottom: 2px solid #00000099;
+    }
+  }
 }

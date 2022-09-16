@@ -30,7 +30,6 @@
     flex-direction: row;
     padding: 7px 12px;
     margin-left: auto;
-    margin-top: -50px;
     &:hover {
       background-color: rgb(0, 138, 140);
       border: 1px solid white;
@@ -53,7 +52,7 @@ th {
 }
 
 td {
-  padding: 10px 10px;
+  padding: 5px 10px;
   position: relative;
   align-items: center;
   color: #ffffff;

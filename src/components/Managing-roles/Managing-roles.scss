@@ -1,0 +1,45 @@
+.add-role-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(38%, max-content));
+    column-gap: 12%;
+    row-gap: 8px;
+    justify-content: center;
+    width: calc(100% - 30px);
+    &__label {
+        font-size: 10px;
+        line-height: 12px;
+    }
+    &__input {
+        width: 100%;
+        border: 1px solid rgb(28, 145, 234);
+        padding: 8px 12px;
+        border-radius: 5px;
+        margin-bottom: 0;
+        &-date {
+            width: 70%;
+            border: 1px solid rgb(28, 145, 234);
+            padding: 7px 10px;
+            border-radius: 5px;
+        }
+    }
+}
+
+.add-role-title {
+    font-size: 22px;
+    line-height: 24px;
+    font-weight: 400;
+    margin: 40px 0 -45px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ffffff;
+}
+
+.add-role-buttons {
+    &__change {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 40px;
+      }
+      &__change_hidden {
+        display: none;
+      }
+}

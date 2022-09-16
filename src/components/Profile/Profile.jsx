@@ -3,32 +3,16 @@ import Card from "../Card/Card";
 import Role from "../Role/Role";
 
 function Profile({
-  validName,
-  validEmail,
-  validPassword,
-  validConfirmPassword,
-  validPatronymic,
-  validLastName,
   switchElem,
   clickFirstSwitch,
-  activeRole,
-  setActiveRole,
   activeRoleTwo,
   setActiveRoleTwo,
-  title,
-  setTitle,
-  arr,
-  setArr,
-  twoArr,
-  setTwoArr,
   redacted,
   setRedacted,
-  valueTel,
-  setValueTel,
-  valueGender,
-  setValueGender,
-  validTel,
   visiblePassword,
+  roleInfo,
+  setRoleInfo,
+  setCurrentUser,
 }) {
 
     return (
@@ -50,33 +34,18 @@ function Profile({
       </div>
       {switchElem ? (
         <Role
-          activeRole={activeRole}
-          setActiveRole={setActiveRole}
           activeRoleTwo={activeRoleTwo}
           setActiveRoleTwo={setActiveRoleTwo}
-          title={title}
-          setTitle={setTitle}
-          arr={arr}
-          setArr={setArr}
-          twoArr={twoArr}
-          setTwoArr={setTwoArr}
+          roleInfo={roleInfo}
+          setRoleInfo={setRoleInfo}
+          setCurrentUser={setCurrentUser}
         />
       ) : (
         <Card
-          validName={validName}
-          validEmail={validEmail}
-          validPassword={validPassword}
-          validConfirmPassword={validConfirmPassword}
-          validPatronymic={validPatronymic}
-          validLastName={validLastName}
           redacted={redacted}
           setRedacted={setRedacted}
-          valueTel={valueTel}
-          setValueTel={setValueTel}
-          valueGender={valueGender}
-          setValueGender={setValueGender}
-          validTel={validTel}
           visiblePassword={visiblePassword}
+          setCurrentUser={setCurrentUser}
         />
       )}
     </div>

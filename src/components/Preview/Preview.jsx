@@ -14,13 +14,14 @@ function Preview({
   validLastName,
   checkbox,
   setCheckbox,
-  visiblePassword
+  visiblePassword,
+  setCurrentUser,
 }) {
   const [visibleForm, setVisibleForm] = React.useState(false);
 
   const escFunction = React.useCallback((event) => {
     if (event.key === "Escape") {
-      setVisibleForm(false)
+      setVisibleForm(false);
     }
   }, []);
 
@@ -41,14 +42,13 @@ function Preview({
       <Header />
       <div className="preview">
         <img className="preview__img" src={backgroundImg}></img>
-        <div className="preview__background" onClick={() => setVisibleForm(false)}></div>
+        <div
+          className="preview__background"
+          onClick={() => setVisibleForm(false)}
+        ></div>
       </div>
       <AuthorizationForm
-        validName={validName}
-        validEmail={validEmail}
-        validPassword={validPassword}
         visibleForm={visibleForm}
-        setVisibleForm={setVisibleForm}
         openRegisterPopup={openRegisterPopup}
         checkbox={checkbox}
         setCheckbox={setCheckbox}
@@ -64,6 +64,7 @@ function Preview({
         validPatronymic={validPatronymic}
         validLastName={validLastName}
         visiblePassword={visiblePassword}
+        setCurrentUser={setCurrentUser}
       />
     </>
   );

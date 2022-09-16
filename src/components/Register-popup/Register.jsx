@@ -14,51 +14,17 @@ function Register({
   validPatronymic,
   validLastName,
   visiblePassword,
+  setCurrentUser
 }) {
-  const {
-    valueName,
-    setValueName,
-    valueLastName,
-    setValueLastName,
-    valuePatronymic,
-    setValuePatronymic,
-    valueEmail,
-    setValueEmail,
-    valuePassword,
-    setValuePassword,
-    valueConfirmPassword,
-    setValueConfirmPassword,
-  } = React.useContext(CurrentUserContext);
+  const currentUser = React.useContext(CurrentUserContext);
 
   React.useEffect(() => {
-    setValueName(JSON.parse(localStorage.getItem("valueName")));
-    setValuePassword(JSON.parse(localStorage.getItem("valuePassword")));
-    setValueConfirmPassword(
-      JSON.parse(localStorage.getItem("valueConfirmPassword"))
-    );
-    setValueEmail(JSON.parse(localStorage.getItem("valueEmail")));
-    setValueLastName(JSON.parse(localStorage.getItem("valueLastName")));
-    setValuePatronymic(JSON.parse(localStorage.getItem("valuePatronymic")));
-  }, []);
+    setCurrentUser(JSON.parse(window.localStorage.getItem('currentUser')));
+  }, [])
 
   React.useEffect(() => {
-    localStorage.setItem("valueName", JSON.stringify(valueName));
-    localStorage.setItem("valuePassword", JSON.stringify(valuePassword));
-    localStorage.setItem(
-      "valueConfirmPassword",
-      JSON.stringify(valueConfirmPassword)
-    );
-    localStorage.setItem("valueEmail", JSON.stringify(valueEmail));
-    localStorage.setItem("valueLastName", JSON.stringify(valueLastName));
-    localStorage.setItem("valuePatronymic", JSON.stringify(valuePatronymic));
-  }, [
-    valueName,
-    valuePassword,
-    valueConfirmPassword,
-    valueEmail,
-    valueLastName,
-    valuePatronymic,
-  ]);
+    window.localStorage.setItem('currentUser', JSON.stringify(currentUser));
+  }, [currentUser]);
 
   return (
     <form
@@ -76,31 +42,75 @@ function Register({
       <label className="register-form__label">Фамилия *</label>
       <input
         className={`${
-          validLastName && valueLastName.length > 0
+          validLastName && currentUser.lastName.length > 0
             ? "register-form__input"
             : "register-form__input_error"
         }`}
         type="text"
-        value={valueLastName}
-        onChange={(e) => setValueLastName(e.target.value)}
+        value={currentUser.lastName || ""}
+        onChange={(e) =>
+          setCurrentUser({
+            id: currentUser.id,
+            img: currentUser.img,
+            name: currentUser.name,
+            lastName: e.target.value,
+            patronymic: currentUser.patronymic,
+            date: currentUser.date,
+            email: currentUser.email,
+            lastDate: currentUser.lastDate,
+            currentSession: currentUser.currentSession,
+            cart: currentUser.cart,
+            edit: currentUser.edit,
+            tel: currentUser.tel,
+            gender: currentUser.gender,
+            password: currentUser.password,
+            confirmPassword: currentUser.confirmPassword,
+            roles: currentUser.roles,
+            functions: currentUser.functions,
+          })
+        }
+        // onChange={(e) => setValueLastName(e.target.value)}
       ></input>
-      {!validLastName && valueLastName.length > 0 && (
-        <span className="authorization-form__error">
-          Фамилия должна быть длиной от трёх до двадцати символов, только буквы.
-        </span>
-      )}
+      {!validLastName &&
+        currentUser.lastName &&
+        currentUser.lastName.length > 0 && (
+          <span className="authorization-form__error">
+            Фамилия должна быть длиной от трёх до двадцати символов, только
+            буквы.
+          </span>
+        )}
       <label className="register-form__label">Имя *</label>
       <input
         className={`${
-          validName && valueName.length > 0
+          validName && currentUser.name.length > 0
             ? "register-form__input"
             : "register-form__input_error"
         }`}
         type="text"
-        value={valueName}
-        onChange={(e) => setValueName(e.target.value)}
+        value={currentUser.name || ""}
+        onChange={(e) =>
+          setCurrentUser({
+            id: currentUser.id,
+            img: currentUser.img,
+            name: e.target.value,
+            lastName: currentUser.lastName,
+            patronymic: currentUser.patronymic,
+            date: currentUser.date,
+            email: currentUser.email,
+            lastDate: currentUser.lastDate,
+            currentSession: currentUser.currentSession,
+            cart: currentUser.cart,
+            edit: currentUser.edit,
+            tel: currentUser.tel,
+            gender: currentUser.gender,
+            password: currentUser.password,
+            confirmPassword: currentUser.confirmPassword,
+            roles: currentUser.roles,
+            functions: currentUser.functions,
+          })
+        }
       ></input>
-      {!validName && valueName.length > 0 && (
+      {!validName && currentUser.name && currentUser.name.length > 0 && (
         <span className="authorization-form__error">
           Имя должно быть длиной от трёх до двадцати символов, только буквы.
         </span>
@@ -108,32 +118,74 @@ function Register({
       <label className="register-form__label">Отчество</label>
       <input
         className={`${
-          validPatronymic && valuePatronymic.length > 0
+          validPatronymic && currentUser.patronymic.length > 0
             ? "register-form__input"
             : "register-form__input_error"
         }`}
         type="text"
-        value={valuePatronymic}
-        onChange={(e) => setValuePatronymic(e.target.value)}
+        value={currentUser.patronymic || ""}
+        onChange={(e) =>
+          setCurrentUser({
+            id: currentUser.id,
+            img: currentUser.img,
+            name: currentUser.name,
+            lastName: currentUser.lastName,
+            patronymic: e.target.value,
+            date: currentUser.date,
+            email: currentUser.email,
+            lastDate: currentUser.lastDate,
+            currentSession: currentUser.currentSession,
+            cart: currentUser.cart,
+            edit: currentUser.edit,
+            tel: currentUser.tel,
+            gender: currentUser.gender,
+            password: currentUser.password,
+            confirmPassword: currentUser.confirmPassword,
+            roles: currentUser.roles,
+            functions: currentUser.functions,
+          })
+        }
       ></input>
-      {!validPatronymic && valuePatronymic.length > 0 && (
-        <span className="authorization-form__error">
-          Отчество должно быть длиной от трёх до двадцати символов, только
-          буквы.
-        </span>
-      )}
+      {currentUser.patronymic &&
+        !validPatronymic &&
+        currentUser.patronymic.length > 0 && (
+          <span className="authorization-form__error">
+            Отчество должно быть длиной от трёх до двадцати символов, только
+            буквы.
+          </span>
+        )}
       <label className="register-form__label">Email *</label>
       <input
         className={`${
-          validEmail && valueEmail.length > 0
+          validEmail && currentUser.email.length > 0
             ? "register-form__input"
             : "register-form__input_error"
         }`}
         type="email"
-        value={valueEmail}
-        onChange={(e) => setValueEmail(e.target.value)}
+        value={currentUser.email || ""}
+        onChange={(e) =>
+          setCurrentUser({
+            id: currentUser.id,
+            img: currentUser.img,
+            name: currentUser.name,
+            lastName: currentUser.lastName,
+            patronymic: currentUser.patronymic,
+            date: currentUser.date,
+            email: e.target.value,
+            lastDate: currentUser.lastDate,
+            currentSession: currentUser.currentSession,
+            cart: currentUser.cart,
+            edit: currentUser.edit,
+            tel: currentUser.tel,
+            gender: currentUser.gender,
+            password: currentUser.password,
+            confirmPassword: currentUser.confirmPassword,
+            roles: currentUser.roles,
+            functions: currentUser.functions,
+          })
+        }
       ></input>
-      {!validEmail && valueEmail.length > 0 && (
+      {currentUser.email && !validEmail && currentUser.email.length > 0 && (
         <span className="authorization-form__error">
           Введите корректный email
         </span>
@@ -148,13 +200,33 @@ function Register({
         <label className="register-form__label">Пароль *</label>
         <input
           className={`${
-            validPassword && valuePassword.length > 0
+            validPassword && currentUser.password.length > 0
               ? "register-form__input"
               : "register-form__input_error"
           }`}
           type="password"
-          value={valuePassword}
-          onChange={(e) => setValuePassword(e.target.value)}
+          value={currentUser.password || ""}
+          onChange={(e) =>
+            setCurrentUser({
+              id: currentUser.id,
+              img: currentUser.img,
+              name: currentUser.name,
+              lastName: currentUser.lastName,
+              patronymic: currentUser.patronymic,
+              date: currentUser.date,
+              email: currentUser.email,
+              lastDate: currentUser.lastDate,
+              currentSession: currentUser.currentSession,
+              cart: currentUser.cart,
+              edit: currentUser.edit,
+              tel: currentUser.tel,
+              gender: currentUser.gender,
+              password: e.target.value,
+              confirmPassword: currentUser.confirmPassword,
+              roles: currentUser.roles,
+              functions: currentUser.functions,
+            })
+          }
         ></input>
         <img
           className={`${
@@ -165,12 +237,14 @@ function Register({
           onClick={(e) => visiblePassword(e)}
         ></img>
       </div>
-      {!validPassword && valuePassword.length > 0 && (
-        <span className="authorization-form__error">
-          Пароль должен содержать минимум одну цифру, одну большую и маленьку
-          буквы латинского алфавита и быть не короче шести символов
-        </span>
-      )}
+      {!validPassword &&
+        currentUser.password &&
+        currentUser.password.length > 0 && (
+          <span className="authorization-form__error">
+            Пароль должен содержать минимум одну цифру, одну большую и маленьку
+            буквы латинского алфавита и быть не короче шести символов
+          </span>
+        )}
       <div
         className={`${
           visibleForm
@@ -181,13 +255,35 @@ function Register({
         <label className="register-form__label">Подтвердите пароль *</label>
         <input
           className={`${
-            validConfirmPassword && valueConfirmPassword.length > 0
+            currentUser.confirmPassword &&
+            validConfirmPassword &&
+            currentUser.confirmPassword.length > 0
               ? "register-form__input"
               : "register-form__input_error"
           }`}
           type="password"
-          value={valueConfirmPassword}
-          onChange={(e) => setValueConfirmPassword(e.target.value)}
+          value={currentUser.confirmPassword || ""}
+          onChange={(e) =>
+            setCurrentUser({
+              id: currentUser.id,
+              img: currentUser.img,
+              name: currentUser.name,
+              lastName: currentUser.lastName,
+              patronymic: currentUser.patronymic,
+              date: currentUser.date,
+              email: currentUser.email,
+              lastDate: currentUser.lastDate,
+              currentSession: currentUser.currentSession,
+              cart: currentUser.cart,
+              edit: currentUser.edit,
+              tel: currentUser.tel,
+              gender: currentUser.gender,
+              password: currentUser.password,
+              confirmPassword: e.target.value,
+              roles: currentUser.roles,
+              functions: currentUser.functions,
+            })
+          }
         ></input>
         <img
           className={`${
@@ -198,9 +294,11 @@ function Register({
           onClick={(e) => visiblePassword(e)}
         ></img>
       </div>
-      {!validConfirmPassword && valueConfirmPassword.length > 0 && (
-        <span className="authorization-form__error">Пароли не совпадают</span>
-      )}
+      {currentUser.confirmPassword &&
+        !validConfirmPassword &&
+        currentUser.confirmPassword.length > 0 && (
+          <span className="authorization-form__error">Пароли не совпадают</span>
+        )}
       <Link to="/home">
         <button
           className={`${

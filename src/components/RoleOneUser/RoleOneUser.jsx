@@ -1,15 +1,13 @@
 import React from "react";
 import cartSvg from "../../assets/images/cart.svg";
 import plusImg from "../../assets/images/plus-svgrepo-com.svg";
-import { CurrentUserContext } from "../contexts/context";
 
-function Role({
+function RoleOneUser({
   activeRoleTwo,
   setActiveRoleTwo,
   redactedUser,
-  roleInfo,
-  setRoleInfo,
-  setCurrentUser,
+  oneUser,
+  setOneUser,
 }) {
   const convertedDate = JSON.stringify(new Date())
     .split("")
@@ -21,9 +19,7 @@ function Role({
     .map((i) => `${i}.`)
     .join("")
     .substring(0, 10);
-
-    const currentUser = React.useContext(CurrentUserContext);
-
+  const [roleInfo, setRoleInfo] = React.useState(oneUser.roles[1]);
   const [stateModal, setStateModal] = React.useState(false);
   const [newRoleState, setNewRoleState] = React.useState({
     id: null,
@@ -31,7 +27,6 @@ function Role({
     systemName: "",
     date: "",
   });
-
   const escFunction = React.useCallback((event) => {
     if (event.key === "Escape") {
       setStateModal(false);
@@ -62,27 +57,25 @@ function Role({
   };
   // Удаление ролей
   const deleteRole = (item) => {
-    const filtred = currentUser.roles.filter((i) => i.id !== item.id);
-    setCurrentUser({
-      id: currentUser.id,
-      img: currentUser.img,
-      name: currentUser.name,
-      lastName: currentUser.lastName,
-      patronymic: currentUser.patronymic,
-      date: currentUser.date,
-      email: currentUser.email,
-      lastDate: currentUser.lastDate,
-      currentSession: currentUser.currentSession,
-      cart: currentUser.cart,
-      edit: currentUser.edit,
-      tel: currentUser.tel,
-      gender: currentUser.gender,
-      password: currentUser.password,
-      confirmPassword: currentUser.confirmPassword,
+    const filtred = oneUser.roles.filter((i) => i.id !== item.id);
+    setOneUser({
+      id: oneUser.id,
+      img: oneUser.img,
+      name: oneUser.name,
+      lastName: oneUser.lastName,
+      patronymic: oneUser.patronymic,
+      date: oneUser.date,
+      email: oneUser.email,
+      lastDate: oneUser.lastDate,
+      currentSession: oneUser.currentSession,
+      cart: oneUser.cart,
+      edit: oneUser.edit,
+      tel: oneUser.tel,
+      gender: oneUser.gender,
+      password: oneUser.password,
       roles: filtred,
-      functions: currentUser.functions,
-    })
-    // setArr(filtred);
+      functions: oneUser.functions,
+    });
     if (filtred.length > 0) {
       const elemId = filtred.map((el) => el)[0].id;
       const elemName = filtred.map((el) => el)[0].role;
@@ -105,55 +98,51 @@ function Role({
   };
   // Удаление функций
   const deleteFunction = (item) => {
-    setCurrentUser({
-      id: currentUser.id,
-      img: currentUser.img,
-      name: currentUser.name,
-      lastName: currentUser.lastName,
-      patronymic: currentUser.patronymic,
-      date: currentUser.date,
-      email: currentUser.email,
-      lastDate: currentUser.lastDate,
-      currentSession: currentUser.currentSession,
-      cart: currentUser.cart,
-      edit: currentUser.edit,
-      tel: currentUser.tel,
-      gender: currentUser.gender,
-      password: currentUser.password,
-      confirmPassword: currentUser.confirmPassword,
-      roles: currentUser.roles,
-      functions: currentUser.functions.filter((i) => i.id !== item.id),
-    })
-    // setTwoArr(currentUser.functions.filter((i) => i.id !== item.id));
+    setOneUser({
+      id: oneUser.id,
+      img: oneUser.img,
+      name: oneUser.name,
+      lastName: oneUser.lastName,
+      patronymic: oneUser.patronymic,
+      date: oneUser.date,
+      email: oneUser.email,
+      lastDate: oneUser.lastDate,
+      currentSession: oneUser.currentSession,
+      cart: oneUser.cart,
+      edit: oneUser.edit,
+      tel: oneUser.tel,
+      gender: oneUser.gender,
+      password: oneUser.password,
+      roles: oneUser.roles,
+      functions: oneUser.functions.filter((i) => i.id !== item.id),
+    });
   };
   const addRole = (e) => {
     e.preventDefault();
     const newRole = {
-      id: currentUser.roles.length,
+      id: oneUser.roles.length,
       role: newRoleState.role,
       systemName: newRoleState.systemName,
       date: convertedDate,
     };
-    setCurrentUser({
-      id: currentUser.id,
-      img: currentUser.img,
-      name: currentUser.name,
-      lastName: currentUser.lastName,
-      patronymic: currentUser.patronymic,
-      date: currentUser.date,
-      email: currentUser.email,
-      lastDate: currentUser.lastDate,
-      currentSession: currentUser.currentSession,
-      cart: currentUser.cart,
-      edit: currentUser.edit,
-      tel: currentUser.tel,
-      gender: currentUser.gender,
-      password: currentUser.password,
-      confirmPassword: currentUser.confirmPassword,
-      roles: [newRole, ...currentUser.roles],
-      functions: currentUser.functions,
-    })
-    // setArr([newRole, ...arr]);
+    setOneUser({
+      id: oneUser.id,
+      img: oneUser.img,
+      name: oneUser.name,
+      lastName: oneUser.lastName,
+      patronymic: oneUser.patronymic,
+      date: oneUser.date,
+      email: oneUser.email,
+      lastDate: oneUser.lastDate,
+      currentSession: oneUser.currentSession,
+      cart: oneUser.cart,
+      edit: oneUser.edit,
+      tel: oneUser.tel,
+      gender: oneUser.gender,
+      password: oneUser.password,
+      roles: [newRole, ...oneUser.roles],
+      functions: oneUser.functions,
+    });
     setStateModal(false);
     setRoleInfo({
       id: newRole.id,
@@ -174,7 +163,7 @@ function Role({
           </button>
         )}
         <ul className="available-roles">
-          {currentUser.roles.map((item) => (
+          {oneUser.roles.map((item) => (
             <li
               key={item.id}
               className={
@@ -223,7 +212,7 @@ function Role({
 
         <h3 className="role__title">Доступные функции</h3>
         <ul className="available-roles">
-          {currentUser.functions.map((item) => (
+          {oneUser.functions.map((item) => (
             <li
               key={item.id}
               className={
@@ -277,6 +266,19 @@ function Role({
                 })
               }
             ></input>
+            {/* <input
+              className="modal-form__input"
+              placeholder="введите системное дату"
+              value={newRoleState.date}
+              onChange={(e) =>
+                setNewRoleState({
+                  id: newRoleState.id,
+                  role: newRoleState.role,
+                  date: e.target.value,
+                  systemName: newRoleState.systemName,
+                })
+              }
+            ></input> */}
             <button
               className="modal-form__button"
               type="submit"
@@ -292,4 +294,4 @@ function Role({
   );
 }
 
-export default Role;
+export default RoleOneUser;

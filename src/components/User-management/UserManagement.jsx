@@ -8,24 +8,20 @@ import Card from "../Card/Card";
 import Role from "../Role/Role";
 import AddUser from "../AddUser/AddUser";
 import RedactedUser from "../Redacted-user/RedactedUser";
+import RoleOneUser from "../RoleOneUser/RoleOneUser";
 
 function UserManagement({
   switchElem,
   clickFirstSwitch,
-  activeRole,
-  setActiveRole,
   activeRoleTwo,
   setActiveRoleTwo,
-  title,
-  setTitle,
-  arr,
-  setArr,
-  twoArr,
-  setTwoArr,
   redacted,
   checkbox,
   setCheckbox,
   visiblePassword,
+  roleInfo,
+  setRoleInfo,
+  setCurrentUser,
 }) {
   const users = [
     {
@@ -43,6 +39,40 @@ function UserManagement({
       tel: "9 999-999-9999",
       gender: "Ж",
       password: "",
+      roles: [
+        {
+          id: 0,
+          role: "Администратор",
+          systemName: "admin",
+          date: "18.02.2019",
+        },
+        {
+          id: 1,
+          systemName: "god",
+          role: "Бог",
+          date: "14.01.2020",
+        },
+        {
+          id: 2,
+          systemName: "user",
+          role: "Пользователь",
+          date: "14.01.2018",
+        },
+      ],
+      functions: [
+        {
+          id: 0,
+          title: "Управление пользователями",
+        },
+        {
+          id: 1,
+          title: "Управление ролями",
+        },
+        {
+          id: 2,
+          title: "Профиль",
+        },
+      ],
     },
     {
       id: 1,
@@ -59,6 +89,40 @@ function UserManagement({
       tel: "9 999-999-9999",
       gender: "М",
       password: "",
+      roles: [
+        {
+          id: 0,
+          role: "Администратор",
+          systemName: "admin",
+          date: "18.02.2019",
+        },
+        {
+          id: 1,
+          systemName: "god",
+          role: "Бог",
+          date: "14.01.2020",
+        },
+        {
+          id: 2,
+          systemName: "user",
+          role: "Пользователь",
+          date: "14.01.2018",
+        },
+      ],
+      functions: [
+        {
+          id: 0,
+          title: "Управление пользователями",
+        },
+        {
+          id: 1,
+          title: "Управление ролями",
+        },
+        {
+          id: 2,
+          title: "Профиль",
+        },
+      ],
     },
     {
       id: 2,
@@ -75,6 +139,40 @@ function UserManagement({
       tel: "9 999-999-9999",
       gender: "М",
       password: "",
+      roles: [
+        {
+          id: 0,
+          role: "Администратор",
+          systemName: "admin",
+          date: "18.02.2019",
+        },
+        {
+          id: 1,
+          systemName: "god",
+          role: "Бог",
+          date: "14.01.2020",
+        },
+        {
+          id: 2,
+          systemName: "user",
+          role: "Пользователь",
+          date: "14.01.2018",
+        },
+      ],
+      functions: [
+        {
+          id: 0,
+          title: "Управление пользователями",
+        },
+        {
+          id: 1,
+          title: "Управление ролями",
+        },
+        {
+          id: 2,
+          title: "Профиль",
+        },
+      ],
     },
     {
       id: 3,
@@ -91,6 +189,40 @@ function UserManagement({
       tel: "9 999-999-9999",
       gender: "Ж",
       password: "",
+      roles: [
+        {
+          id: 0,
+          role: "Администратор",
+          systemName: "admin",
+          date: "18.02.2019",
+        },
+        {
+          id: 1,
+          systemName: "god",
+          role: "Бог",
+          date: "14.01.2020",
+        },
+        {
+          id: 2,
+          systemName: "user",
+          role: "Пользователь",
+          date: "14.01.2018",
+        },
+      ],
+      functions: [
+        {
+          id: 0,
+          title: "Управление пользователями",
+        },
+        {
+          id: 1,
+          title: "Управление ролями",
+        },
+        {
+          id: 2,
+          title: "Профиль",
+        },
+      ],
     },
     {
       id: 4,
@@ -107,6 +239,40 @@ function UserManagement({
       tel: "9 999-999-9999",
       gender: "М",
       password: "",
+      roles: [
+        {
+          id: 0,
+          role: "Администратор",
+          systemName: "admin",
+          date: "18.02.2019",
+        },
+        {
+          id: 1,
+          systemName: "god",
+          role: "Бог",
+          date: "14.01.2020",
+        },
+        {
+          id: 2,
+          systemName: "user",
+          role: "Пользователь",
+          date: "14.01.2018",
+        },
+      ],
+      functions: [
+        {
+          id: 0,
+          title: "Управление пользователями",
+        },
+        {
+          id: 1,
+          title: "Управление ролями",
+        },
+        {
+          id: 2,
+          title: "Профиль",
+        },
+      ],
     },
     {
       id: 5,
@@ -123,6 +289,40 @@ function UserManagement({
       tel: "9 999-999-9999",
       gender: "М",
       password: "",
+      roles: [
+        {
+          id: 0,
+          role: "Администратор",
+          systemName: "admin",
+          date: "18.02.2019",
+        },
+        {
+          id: 1,
+          systemName: "god",
+          role: "Бог",
+          date: "14.01.2020",
+        },
+        {
+          id: 2,
+          systemName: "user",
+          role: "Пользователь",
+          date: "14.01.2018",
+        },
+      ],
+      functions: [
+        {
+          id: 0,
+          title: "Управление пользователями",
+        },
+        {
+          id: 1,
+          title: "Управление ролями",
+        },
+        {
+          id: 2,
+          title: "Профиль",
+        },
+      ],
     },
   ];
 
@@ -495,18 +695,12 @@ function UserManagement({
                 </button>
               </div>
               {switchElem ? (
-                <Role
-                  activeRole={activeRole}
-                  setActiveRole={setActiveRole}
+                <RoleOneUser
                   activeRoleTwo={activeRoleTwo}
                   setActiveRoleTwo={setActiveRoleTwo}
-                  title={title}
-                  setTitle={setTitle}
-                  arr={arr}
-                  setArr={setArr}
-                  twoArr={twoArr}
-                  setTwoArr={setTwoArr}
                   redactedUser={redactedUser}
+                  oneUser={oneUser}
+                  setOneUser={setOneUser}
                 />
               ) : (
                 <RedactedUser
@@ -541,16 +735,11 @@ function UserManagement({
           </div>
           {switchElem ? (
             <Role
-              activeRole={activeRole}
-              setActiveRole={setActiveRole}
               activeRoleTwo={activeRoleTwo}
               setActiveRoleTwo={setActiveRoleTwo}
-              title={title}
-              setTitle={setTitle}
-              arr={arr}
-              setArr={setArr}
-              twoArr={twoArr}
-              setTwoArr={setTwoArr}
+              roleInfo={roleInfo}
+              setRoleInfo={setRoleInfo}
+              setCurrentUser={setCurrentUser}
             />
           ) : (
             <AddUser

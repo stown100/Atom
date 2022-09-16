@@ -6,40 +6,41 @@ import UserManagement from "../User-management/UserManagement";
 import ManagingRoles from "../Managing-roles/ManagingRoles";
 
 function Home({
-  validName,
-  validEmail,
-  validPassword,
-  validConfirmPassword,
-  validPatronymic,
-  validLastName,
   visiblePassword,
+  setCurrentUser,
 }) {
   const availableRoles = [
     {
       id: 0,
-      name: "Бог",
+      systemName: "god",
+      role: "Бог",
+      date: "14.01.2020",
     },
     {
       id: 1,
-      name: "Администратор",
+      systemName: "admin",
+      role: "Администратор",
+      date: "14.01.2021",
     },
     {
       id: 2,
-      name: "Пользователь",
+      systemName: "user",
+      role: "Пользователь",
+      date: "14.01.2018",
     },
   ];
   const availableRolesTwo = [
     {
       id: 0,
-      name: "Управление пользователями",
+      role: "Управление пользователями",
     },
     {
       id: 1,
-      name: "Управление ролями",
+      role: "Управление ролями",
     },
     {
       id: 2,
-      name: "Профиль",
+      role: "Профиль",
     },
   ];
   const [sideActive, setSideActive] = React.useState(0);
@@ -48,6 +49,13 @@ function Home({
   const [activeRole, setActiveRole] = React.useState(1);
   const [activeRoleTwo, setActiveRoleTwo] = React.useState(null);
   const [title, setTitle] = React.useState("Администратор");
+  const [roleInfo, setRoleInfo] = React.useState({
+    id: 1,
+    role: "Администратор",
+    systemName: "admin",
+    date: "18.02.2019",
+    lastDate: "20.12.2020",
+  });
   const [arr, setArr] = React.useState(availableRoles);
   const [twoArr, setTwoArr] = React.useState(availableRolesTwo);
   const [redacted, setRedacted] = React.useState(false);
@@ -68,57 +76,48 @@ function Home({
     <>
       <Header />
       <div className="home">
-        <Side sideActive={sideActive} setSideActive={setSideActive} setRedacted={setRedacted} setSwitchElem={setSwitchElem} />
+        <Side
+          sideActive={sideActive}
+          setSideActive={setSideActive}
+          setRedacted={setRedacted}
+          setSwitchElem={setSwitchElem}
+          roleInfo={roleInfo}
+        />
         {sideActive === 0 ? (
           <Profile
-            validName={validName}
-            validEmail={validEmail}
-            validPassword={validPassword}
-            validConfirmPassword={validConfirmPassword}
-            validPatronymic={validPatronymic}
-            validLastName={validLastName}
             switchElem={switchElem}
             clickFirstSwitch={clickFirstSwitch}
-            activeRole={activeRole}
-            setActiveRole={setActiveRole}
             activeRoleTwo={activeRoleTwo}
             setActiveRoleTwo={setActiveRoleTwo}
-            title={title}
-            setTitle={setTitle}
-            arr={arr}
-            setArr={setArr}
-            twoArr={twoArr}
-            setTwoArr={setTwoArr}
             redacted={redacted}
             setRedacted={setRedacted}
-            valueTel={valueTel}
-            setValueTel={setValueTel}
-            valueGender={valueGender}
-            setValueGender={setValueGender}
-            validTel={validTel}
             visiblePassword={visiblePassword}
+            roleInfo={roleInfo}
+            setRoleInfo={setRoleInfo}
+            setCurrentUser={setCurrentUser}
           />
         ) : sideActive === 1 ? (
           <UserManagement
             switchElem={switchElem}
             clickFirstSwitch={clickFirstSwitch}
-            activeRole={activeRole}
-            setActiveRole={setActiveRole}
             activeRoleTwo={activeRoleTwo}
             setActiveRoleTwo={setActiveRoleTwo}
-            title={title}
-            setTitle={setTitle}
-            arr={arr}
-            setArr={setArr}
-            twoArr={twoArr}
-            setTwoArr={setTwoArr}
             redacted={redacted}
             checkbox={checkbox}
             setCheckbox={setCheckbox}
             visiblePassword={visiblePassword}
+            roleInfo={roleInfo}
+            setRoleInfo={setRoleInfo}
+            setCurrentUser={setCurrentUser}
           />
         ) : (
-          <ManagingRoles />
+          <ManagingRoles
+            roleInfo={roleInfo}
+            setRoleInfo={setRoleInfo}
+            activeRoleTwo={activeRoleTwo}
+            setActiveRoleTwo={setActiveRoleTwo}
+            setCurrentUser={setCurrentUser}
+          />
         )}
       </div>
     </>

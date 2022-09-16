@@ -7,6 +7,7 @@
     font-size: 18px;
     line-height: 24px;
     font-weight: 400;
+    width: fit-content;
   }
   &__first-block {
     width: calc(50% - 40px);
@@ -40,22 +41,40 @@
     padding-left: 15px;
     width: 100%;
   }
+  &__add-btn {
+    border-radius: 5px;
+    border: 0;
+    color: #ffffff;
+    transition: background-color 0.3s ease-in-out;
+    background-color: darkturquoise;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 7px 12px;
+    margin-left: auto;
+    margin-top: -50px;
+  }
 }
 
 .available-roles {
   list-style-type: none;
   padding: 0;
   overflow-y: scroll;
-  max-height: 96px;
+  max-height: 93px;
+  margin-left: 0;
+  border: 1px solid white;
+  &-managing {
+    max-height: 129px;
+  }
   &__li {
-    border: 1px solid white;
+    border-bottom: 1px solid white;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: rgb(168, 107, 167);
     &_active {
-        border: 1px solid white;
+      border-bottom: 1px solid white;
         display: flex;
         flex-direction: row;
         justify-content: space-between;

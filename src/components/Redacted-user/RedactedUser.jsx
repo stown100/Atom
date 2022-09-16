@@ -66,7 +66,7 @@ function RedactedUser({
     <div className="card">
       <div className="editing">
         <div className="user__avatar-block">
-          <img className="user__avatar" src={avatar} alt="avatar"></img>
+          <img className="user__avatar" src={oneUser.img} alt="avatar"></img>
           <button className="user__avatar-btn">Обновить</button>
         </div>
         <form className="editing__info">
