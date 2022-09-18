@@ -13,8 +13,8 @@ function AuthorizationForm({
 }) {
   const currentUser = React.useContext(CurrentUserContext);
 
-  const [login, setLogin] = React.useState(currentUser.name);
-  const [pass, setPass] = React.useState(currentUser.password);
+  const [login, setLogin] = React.useState(currentUser && currentUser.name);
+  const [pass, setPass] = React.useState(currentUser && currentUser.password);
   // const user =
   //   localStorage.length > 0 && JSON.parse(Object.values(localStorage));
 
@@ -37,14 +37,11 @@ function AuthorizationForm({
     e.preventDefault();
     setCheckbox(!checkbox);
     if (!checkbox) {
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-
       setPass(currentUser.password);
       setLogin(currentUser.name);
     } else {
       setPass("");
       setLogin("");
-      // localStorage.setItem("currentUser", JSON.stringify(""));
     }
   };
 
@@ -123,7 +120,7 @@ function AuthorizationForm({
       )}
 
       {/* Правильно выводить ошибку, что пароли не совпадают. Только в том случае, если реально не совпадают, а если локалсторадж пустой, то не показывать */}
-      {pass !== currentUser.password && pass.length >= 5 && (
+      {currentUser && pass !== currentUser.password && pass.length >= 5 && (
         <span className="authorization-form__error">Не верный пароль</span>
       )}
       <div className="authorization-form__remember-and-enter">

@@ -16,6 +16,7 @@ function Preview({
   setCheckbox,
   visiblePassword,
   setCurrentUser,
+  onRegister,
 }) {
   const [visibleForm, setVisibleForm] = React.useState(false);
 
@@ -65,6 +66,7 @@ function Preview({
         validLastName={validLastName}
         visiblePassword={visiblePassword}
         setCurrentUser={setCurrentUser}
+        onRegister={onRegister}
       />
     </>
   );

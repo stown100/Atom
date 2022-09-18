@@ -2,6 +2,30 @@
   padding-top: 150px;
   padding-left: 70px;
   width: 20%;
+  position: relative;
+}
+
+.exit {
+  position: absolute;
+  bottom: 50px;
+  left: 70px;
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  width: calc(100% - 70px);
+  text-align: center;
+  align-items: center;
+  transition: .3s ease-in-out;
+  &:hover {
+    opacity: 0.7;
+  }
+  &__img {
+    width: 25px;
+    height: 25px;
+    margin-right: 15px;
+  }
+  &__text {
+    color: #ffffff;
+  }
 }
 
 .chapter {
