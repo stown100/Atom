@@ -62,66 +62,39 @@ function Role({
   };
   // Удаление ролей
   const deleteRole = (item) => {
-    const filtred = currentUser.roles.filter((i) => i.id !== item.id);
-    setCurrentUser({
-      id: currentUser.id,
-      img: currentUser.img,
-      name: currentUser.name,
-      lastName: currentUser.lastName,
-      patronymic: currentUser.patronymic,
-      date: currentUser.date,
-      email: currentUser.email,
-      lastDate: currentUser.lastDate,
-      currentSession: currentUser.currentSession,
-      cart: currentUser.cart,
-      edit: currentUser.edit,
-      tel: currentUser.tel,
-      gender: currentUser.gender,
-      password: currentUser.password,
-      confirmPassword: currentUser.confirmPassword,
-      roles: filtred,
-      functions: currentUser.functions,
-    })
-    // setArr(filtred);
-    if (filtred.length > 0) {
-      const elemId = filtred.map((el) => el)[0].id;
-      const elemName = filtred.map((el) => el)[0].role;
-      const elemSystemName = filtred.map((el) => el)[0].systemName;
-      const elemDate = filtred.map((el) => el)[0].date;
-      setRoleInfo({
-        id: elemId,
-        role: elemName,
-        systemName: elemSystemName,
-        date: elemDate,
-      });
-    } else {
-      setRoleInfo({
-        id: null,
-        role: "",
-        systemName: "",
-        date: "",
-      });
+    if (currentUser.roles.length > 1) {
+      const filtred = currentUser.roles.filter((i) => i.id !== item.id);
+      setCurrentUser({
+        ...currentUser,
+        roles: filtred,
+      })
+      currentUser.roles = filtred
+      window.localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      if (filtred.length > 0) {
+        const elemId = filtred.map((el) => el)[0].id;
+        const elemName = filtred.map((el) => el)[0].role;
+        const elemSystemName = filtred.map((el) => el)[0].systemName;
+        const elemDate = filtred.map((el) => el)[0].date;
+        setRoleInfo({
+          id: elemId,
+          role: elemName,
+          systemName: elemSystemName,
+          date: elemDate,
+        });
+      } else {
+        setRoleInfo({
+          id: null,
+          role: "",
+          systemName: "",
+          date: "",
+        });
+      } 
     }
   };
   // Удаление функций
   const deleteFunction = (item) => {
     setCurrentUser({
-      id: currentUser.id,
-      img: currentUser.img,
-      name: currentUser.name,
-      lastName: currentUser.lastName,
-      patronymic: currentUser.patronymic,
-      date: currentUser.date,
-      email: currentUser.email,
-      lastDate: currentUser.lastDate,
-      currentSession: currentUser.currentSession,
-      cart: currentUser.cart,
-      edit: currentUser.edit,
-      tel: currentUser.tel,
-      gender: currentUser.gender,
-      password: currentUser.password,
-      confirmPassword: currentUser.confirmPassword,
-      roles: currentUser.roles,
+      ...currentUser,
       functions: currentUser.functions.filter((i) => i.id !== item.id),
     })
     // setTwoArr(currentUser.functions.filter((i) => i.id !== item.id));
@@ -135,25 +108,9 @@ function Role({
       date: convertedDate,
     };
     setCurrentUser({
-      id: currentUser.id,
-      img: currentUser.img,
-      name: currentUser.name,
-      lastName: currentUser.lastName,
-      patronymic: currentUser.patronymic,
-      date: currentUser.date,
-      email: currentUser.email,
-      lastDate: currentUser.lastDate,
-      currentSession: currentUser.currentSession,
-      cart: currentUser.cart,
-      edit: currentUser.edit,
-      tel: currentUser.tel,
-      gender: currentUser.gender,
-      password: currentUser.password,
-      confirmPassword: currentUser.confirmPassword,
+      ...currentUser,
       roles: [newRole, ...currentUser.roles],
-      functions: currentUser.functions,
     })
-    // setArr([newRole, ...arr]);
     setStateModal(false);
     setRoleInfo({
       id: newRole.id,

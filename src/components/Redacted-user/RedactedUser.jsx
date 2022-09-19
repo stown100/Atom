@@ -60,6 +60,7 @@ function RedactedUser({
         setValueGender("женский");
       }
     }
+    window.localStorage.setItem("currentUser", JSON.stringify(currentUser));
   };
 
   return (

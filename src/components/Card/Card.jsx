@@ -53,6 +53,7 @@ function Card({ redacted, setRedacted, visiblePassword, setCurrentUser }) {
   const openFormWithRedactedProfile = (e) => {
     e.preventDefault();
     setRedacted(!redacted);
+    window.localStorage.setItem("currentUser", JSON.stringify(currentUser));
   };
 
   const checkboxClick = (e) => {
@@ -116,6 +117,7 @@ function Card({ redacted, setRedacted, visiblePassword, setCurrentUser }) {
         confirmPassword: e.target.value,
       });
     }
+    window.localStorage.setItem("currentUser", JSON.stringify(currentUser));
   };
 
   const user = JSON.parse(window.localStorage.getItem("currentUser"));

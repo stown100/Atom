@@ -18,7 +18,7 @@ function ManagingRoles({
   const [stateRole, setStateRole] = React.useState(roleInfo);
   const [addRoleFrom, setAddRoleForm] = React.useState(false);
   const [newRoleState, setNewRoleState] = React.useState({
-    id: null,
+    id: currentUser.length + 1,
     role: "",
     systemName: "",
     date: "",
@@ -51,48 +51,42 @@ function ManagingRoles({
       active: checkboxFunc,
     },
   ];
-
   // Удаление ролей
-  const deleteRole = (item) => {
-    const filtred = currentUser.roles.filter((i) => i.id !== item.id);
-    setCurrentUser({
-      id: currentUser.id,
-      img: currentUser.img,
-      name: currentUser.name,
-      lastName: currentUser.lastName,
-      patronymic: currentUser.patronymic,
-      date: currentUser.date,
-      email: currentUser.email,
-      lastDate: currentUser.lastDate,
-      currentSession: currentUser.currentSession,
-      cart: currentUser.cart,
-      edit: currentUser.edit,
-      tel: currentUser.tel,
-      gender: currentUser.gender,
-      password: currentUser.password,
-      confirmPassword: currentUser.confirmPassword,
-      roles: filtred,
-      functions: currentUser.functions,
-    });
-    // setArr(filtred);
-    if (filtred.length > 0) {
-      const elemId = filtred.map((el) => el)[0].id;
-      const elemName = filtred.map((el) => el)[0].role;
-      const elemSystemName = filtred.map((el) => el)[0].systemName;
-      const elemDate = filtred.map((el) => el)[0].date;
-      setRoleInfo({
-        id: elemId,
-        role: elemName,
-        systemName: elemSystemName,
-        date: elemDate,
-      });
-    } else {
-      setRoleInfo({
-        id: null,
-        role: "",
-        systemName: "",
-        date: "",
-      });
+  const deleteRole = (e, item) => {
+    if (currentUser.roles.length > 1) {
+      e.preventDefault();
+      const filtred = currentUser.roles.filter((i) => i.id !== item.id);
+      // setCurrentUser({
+      //   ...currentUser,
+      //   roles: filtred,
+      // });
+      // setCurrentUser((prev) => {
+      //   return {
+      //     ...prev,
+      //     roles: filtred,
+      //   };
+      // });
+      currentUser.roles = filtred;
+      if (filtred.length > 0) {
+        const elemId = filtred.map((el) => el)[0].id;
+        const elemName = filtred.map((el) => el)[0].role;
+        const elemSystemName = filtred.map((el) => el)[0].systemName;
+        const elemDate = filtred.map((el) => el)[0].date;
+        setRoleInfo({
+          id: elemId,
+          role: elemName,
+          systemName: elemSystemName,
+          date: elemDate,
+        });
+      } else {
+        setRoleInfo({
+          id: null,
+          role: "",
+          systemName: "",
+          date: "",
+        });
+      }
+      window.localStorage.setItem("currentUser", JSON.stringify(currentUser));
     }
   };
 
@@ -110,25 +104,9 @@ function ManagingRoles({
   // Удаление функций
   const deleteFunction = (item) => {
     setCurrentUser({
-      id: currentUser.id,
-      img: currentUser.img,
-      name: currentUser.name,
-      lastName: currentUser.lastName,
-      patronymic: currentUser.patronymic,
-      date: currentUser.date,
-      email: currentUser.email,
-      lastDate: currentUser.lastDate,
-      currentSession: currentUser.currentSession,
-      cart: currentUser.cart,
-      edit: currentUser.edit,
-      tel: currentUser.tel,
-      gender: currentUser.gender,
-      password: currentUser.password,
-      confirmPassword: currentUser.confirmPassword,
-      roles: currentUser.roles,
+      ...currentUser,
       functions: currentUser.functions.filter((i) => i.id !== item.id),
     });
-    // setTwoArr(currentUser.functions.filter((i) => i.id !== item.id));
   };
   const toggleFunction = (e, item) => {
     e.preventDefault();
@@ -150,23 +128,8 @@ function ManagingRoles({
     setAddRoleForm(true);
     if (e.target.name === "button") {
       setCurrentUser({
-        id: currentUser.id,
-        img: currentUser.img,
-        name: currentUser.name,
-        lastName: currentUser.lastName,
-        patronymic: currentUser.patronymic,
-        date: currentUser.date,
-        email: currentUser.email,
-        lastDate: currentUser.lastDate,
-        currentSession: currentUser.currentSession,
-        cart: currentUser.cart,
-        edit: currentUser.edit,
-        tel: currentUser.tel,
-        gender: currentUser.gender,
-        password: currentUser.password,
-        confirmPassword: currentUser.confirmPassword,
+        ...currentUser,
         roles: [newRoleState, ...currentUser.roles],
-        functions: currentUser.functions,
       });
     } else if (e.target.name === "button-save") {
       if (
@@ -175,29 +138,9 @@ function ManagingRoles({
         newRoleState.date.length > 0 &&
         newRoleState.lastDate.length > 0
       ) {
-        newRoleState.id = null;
-        newRoleState.role = "";
-        newRoleState.systemName = "";
-        newRoleState.date = "";
-        newRoleState.lastDate = "";
         setCurrentUser({
-          id: currentUser.id,
-          img: currentUser.img,
-          name: currentUser.name,
-          lastName: currentUser.lastName,
-          patronymic: currentUser.patronymic,
-          date: currentUser.date,
-          email: currentUser.email,
-          lastDate: currentUser.lastDate,
-          currentSession: currentUser.currentSession,
-          cart: currentUser.cart,
-          edit: currentUser.edit,
-          tel: currentUser.tel,
-          gender: currentUser.gender,
-          password: currentUser.password,
-          confirmPassword: currentUser.confirmPassword,
+          ...currentUser,
           roles: [newRole, ...currentUser.roles.slice(1)],
-          functions: currentUser.functions,
         });
         setRoleInfo({
           id: currentUser.roles.length,
@@ -207,6 +150,7 @@ function ManagingRoles({
           lastDate: currentUser.roles[0].lastDate,
         });
       }
+      window.localStorage.setItem("currentUser", JSON.stringify(currentUser));
       setAddRoleForm(false);
     } else if (e.target.name === "name") {
       newRoleState.role = e.target.value;
@@ -281,7 +225,6 @@ function ManagingRoles({
     setFuncState(!funcState);
   };
 
-
   // СДЕЛАТЬ ВЫБОР КАРТОЧЕК
   const checkboxClick = (e, id) => {
     e.preventDefault();
@@ -354,7 +297,7 @@ function ManagingRoles({
                       className="available-roles__li-img"
                       src={cartSvg}
                       alt="урна"
-                      onClick={() => deleteRole(item)}
+                      onClick={(e) => deleteRole(e, item)}
                     />
                   </div>
                 </li>

@@ -397,11 +397,6 @@ function UserManagement({
     }
   });
 
-  //   React.useEffect(() => {
-  //     const sortedUsers = sortFunction(sortByLastName, userState);
-  //     setUserState(sortedUsers);
-  //   }, [sortByLastName]);
-
   const deleteUser = (e, item) => {
     e.preventDefault();
     const filterUser = userState.filter((i) => i.id !== item.id);
@@ -436,147 +431,43 @@ function UserManagement({
     e.preventDefault();
     if (e.target.name === "name") {
       setOneUser({
-        id: oneUser.id,
-        img: person1,
-        lastDate: "14.05.2020",
-        currentSession: "1224rcd2321",
-        cart: cartImg,
-        edit: editImg,
+        ...oneUser,
         name: e.target.value,
-        lastName: oneUser.lastName,
-        patronymic: oneUser.patronymic,
-        email: oneUser.email,
-        password: oneUser.password,
-        confirmPassword: oneUser.confirmPassword,
-        date: oneUser.date,
-        tel: oneUser.tel,
-        gender: oneUser.gender,
       });
     } else if (e.target.name === "last-name") {
       setOneUser({
-        id: oneUser.id,
-        img: person1,
-        lastDate: "14.05.2020",
-        currentSession: "1224rcd2321",
-        cart: cartImg,
-        edit: editImg,
-        name: oneUser.name,
+        ...oneUser,
         lastName: e.target.value,
-        patronymic: oneUser.patronymic,
-        email: oneUser.email,
-        password: oneUser.password,
-        confirmPassword: oneUser.confirmPassword,
-        date: oneUser.date,
-        tel: oneUser.tel,
-        gender: oneUser.gender,
       });
     } else if (e.target.name === "patronymic") {
       setOneUser({
-        id: oneUser.id,
-        img: person1,
-        lastDate: "14.05.2020",
-        currentSession: "1224rcd2321",
-        cart: cartImg,
-        edit: editImg,
-        name: oneUser.name,
-        lastName: oneUser.lastName,
+        ...oneUser,
         patronymic: e.target.value,
-        email: oneUser.email,
-        password: oneUser.password,
-        confirmPassword: oneUser.confirmPassword,
-        date: oneUser.date,
-        tel: oneUser.tel,
-        gender: oneUser.gender,
       });
     } else if (e.target.name === "date") {
       setOneUser({
-        id: oneUser.id,
-        img: person1,
-        lastDate: "14.05.2020",
-        currentSession: "1224rcd2321",
-        cart: cartImg,
-        edit: editImg,
-        name: oneUser.name,
-        lastName: oneUser.lastName,
-        patronymic: oneUser.patronymic,
-        email: oneUser.email,
-        password: oneUser.password,
-        confirmPassword: oneUser.confirmPassword,
+        ...oneUser,
         date: e.target.value,
-        tel: oneUser.tel,
-        gender: oneUser.gender,
       });
     } else if (e.target.name === "tel") {
       setOneUser({
-        id: oneUser.id,
-        img: person1,
-        lastDate: "14.05.2020",
-        currentSession: "1224rcd2321",
-        cart: cartImg,
-        edit: editImg,
-        name: oneUser.name,
-        lastName: oneUser.lastName,
-        patronymic: oneUser.patronymic,
-        email: oneUser.email,
-        password: oneUser.password,
-        confirmPassword: oneUser.confirmPassword,
-        date: oneUser.date,
+        ...oneUser,
         tel: e.target.value,
-        gender: oneUser.gender,
       });
     } else if (e.target.name === "password") {
       setOneUser({
-        id: oneUser.id,
-        img: person1,
-        lastDate: "14.05.2020",
-        currentSession: "1224rcd2321",
-        cart: cartImg,
-        edit: editImg,
-        name: oneUser.name,
-        lastName: oneUser.lastName,
-        patronymic: oneUser.patronymic,
-        email: oneUser.email,
+        ...oneUser,
         password: e.target.value,
-        confirmPassword: oneUser.confirmPassword,
-        date: oneUser.date,
-        tel: oneUser.tel,
-        gender: oneUser.gender,
       });
     } else if (e.target.name === "email") {
       setOneUser({
-        id: oneUser.id,
-        img: person1,
-        lastDate: "14.05.2020",
-        currentSession: "1224rcd2321",
-        cart: cartImg,
-        edit: editImg,
-        name: oneUser.name,
-        lastName: oneUser.lastName,
-        patronymic: oneUser.patronymic,
+        ...oneUser,
         email: e.target.value,
-        password: oneUser.password,
-        confirmPassword: oneUser.confirmPassword,
-        date: oneUser.date,
-        tel: oneUser.tel,
-        gender: oneUser.gender,
       });
     } else if (e.target.name === "confirm-password") {
       setOneUser({
-        id: oneUser.id,
-        img: person1,
-        lastDate: "14.05.2020",
-        currentSession: "1224rcd2321",
-        cart: cartImg,
-        edit: editImg,
-        name: oneUser.name,
-        lastName: oneUser.lastName,
-        patronymic: oneUser.patronymic,
-        email: oneUser.email,
-        password: oneUser.password,
+        ...oneUser,
         confirmPassword: e.target.value,
-        date: oneUser.date,
-        tel: oneUser.tel,
-        gender: oneUser.gender,
       });
     }
   };
