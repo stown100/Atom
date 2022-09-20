@@ -66,7 +66,7 @@ function App() {
     ],
   });
 
-  const [checkbox, setCheckbox] = React.useState(false);
+  const [checkbox, setCheckbox] = React.useState(true);
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   const validName =
@@ -99,11 +99,11 @@ function App() {
   const validPatronymic =
     currentUser &&
     currentUser.patronymic &&
-    (currentUser.patronymic !== null ||
-      (currentUser.patronymic.length >= 3 &&
-        currentUser.patronymic.length <= 20 &&
-        currentUser.patronymic ===
-          currentUser.patronymic.replace(/[^a-zA-Zа-яА-Я]/gi, "")));
+    currentUser.patronymic !== null &&
+    currentUser.patronymic.length >= 3 &&
+    currentUser.patronymic.length <= 20 &&
+    currentUser.patronymic ===
+      currentUser.patronymic.replace(/[^a-zA-Zа-яА-Я]/gi, "");
   const validLastName =
     currentUser &&
     currentUser.lastName &&
@@ -138,6 +138,12 @@ function App() {
     navigate("/home");
   };
 
+  const enter = (e) => {
+    e.preventDefault();
+    setLoggedIn(true);
+    navigate("/home");
+  };
+
   // React.useEffect(() => {
   //   if (loggedIn) {
   //     return navigate("/home");
@@ -145,6 +151,7 @@ function App() {
   //     return navigate("/");
   //   }
   // }, [loggedIn]);
+  console.log(loggedIn)
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -167,6 +174,7 @@ function App() {
                 visiblePassword={visiblePassword}
                 setCurrentUser={setCurrentUser}
                 onRegister={onRegister}
+                enter={enter}
               />
             }
           />

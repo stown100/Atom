@@ -41,7 +41,7 @@ function Side({
 
   const clickExit = (e) => {
     e.preventDefault();
-    window.localStorage.removeItem("currentUser");
+    // window.localStorage.removeItem("currentUser");
     setLoggedIn(false);
     navigate("/");
   }

@@ -17,6 +17,7 @@ function Preview({
   visiblePassword,
   setCurrentUser,
   onRegister,
+  enter
 }) {
   const [visibleForm, setVisibleForm] = React.useState(false);
 
@@ -54,6 +55,8 @@ function Preview({
         checkbox={checkbox}
         setCheckbox={setCheckbox}
         visiblePassword={visiblePassword}
+        setCurrentUser={setCurrentUser}
+        enter={enter}
       />
       <Register
         validName={validName}
